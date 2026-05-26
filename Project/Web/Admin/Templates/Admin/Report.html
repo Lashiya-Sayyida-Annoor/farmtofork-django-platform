@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Farmer</td>
+            <td>Product</td>
+            <td>Category</td>
+            <td>Stock</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{farmer_name}}</td>
+            <td>{{product_name}}</td>
+            <td>{{category_name}}</td>
+            <td>{{stock}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

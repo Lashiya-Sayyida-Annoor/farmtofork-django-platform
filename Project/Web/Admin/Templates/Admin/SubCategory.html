@@ -1,0 +1,57 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <form action="" method="post">
+            {% csrf_token %}
+        <br><br><table border="2" align="center">
+    
+        <tr>
+         <td>Category</td>
+         <td><select name="cat_list" id="cat-list">
+            <option value="">----select----</option>
+            {% for i in subdata %}
+            <option value="{{i.id}}">{{i.category_name}}</option>
+            {% endfor %}
+         </select></td>
+         </tr>
+         <tr>
+            <td>SubCategory</td>
+            <td><input type="text" name="txtsubcat" id="txtsubcat" ></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="save" name="btnsub">
+                <input type="reset" value="cancel" name="btnsub1"></td>
+        </tr>
+        </table>
+
+        <br><br><table border="2" align="center">
+            <tr>
+                    <td> SI No</td>
+                    <td>category</td>
+                    <td>Subcategory</td>
+                    <td>Action</td>
+            </tr>
+            
+                {% for i in ssub %}
+                <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.category.category_name}}</td>
+                <td>{{i.subcategory_name}}</td>
+                <td><a href="{% url 'webadmin:delete_subcat' i.id %}">Delete</a></td>
+                </tr>
+                {% endfor %} 
+                
+            </table>
+        </form>
+</body>
+</html>
+{% endblock content %}

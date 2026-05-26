@@ -1,0 +1,67 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form action="" method="post"  enctype="multipart/form-data">
+            {% csrf_token%}
+            <center>
+            <h1>ADMIN REGISTRATION</h1><br><br>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Admin Name</td>
+                            <td><input type="text" class="form-control" name="txtname" id="txtname"></td>
+                        </tr>
+                        <tr>
+                            <td>Admin Contact</td>
+                            <td><input type="text" class="form-control" name="txtcontact" id="txtcontact"></td>
+                        </tr>
+                        <tr>
+                            <td>Admin Email</td>
+                            <td><input type="email" class="form-control" name="txtemail" id="txtemail"></td>
+                        </tr>
+                        <tr>
+                            <td>Photo</td>
+                            <td><input type="file" class="form-control-file" name="file_photo" id="file_photo"></td>
+                        </tr>
+                        <tr>
+                            <td>Admin password</td>
+                            <td><input type="password" class="form-control" name="txtpass" id="txtpass"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <input type="submit" class="btn btn-primary" value="Save" name="btnsub">
+                                <input type="reset" class="btn btn-secondary" value="Cancel" name="btnsub1">
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    {% if msg %}
+                    <script>
+                        alert("{{msg}}");
+                    </script>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (Optional, if you need JavaScript functionality) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}
+

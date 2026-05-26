@@ -1,0 +1,114 @@
+{% extends 'Farmer/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Complaints</title>
+    <style>
+        .card {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #c53636;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgb(42 17 17 / 95%);
+      background-color: #b7c9be;
+    }
+
+    .form-table {
+      width: 100%;
+    }
+
+    .form-table td {
+      padding: 10px;
+    }
+
+    .form-table input[type="text"],
+    .form-table textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-table input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+   h3{
+    color: #9d1212;
+   }
+   .table{
+    width: 70%;
+   }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="card">
+
+    <form action="" method="post">
+        {% csrf_token %}
+    
+        <h3>Report Your Complaints Here...</h3>
+        <table class="form-table" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>Complaint Title:</td>
+                <td><input type="text" name="txtctitle" id=""></td>
+            </tr>
+            <tr>
+                <td>Complaint Content:</td>
+                <td><textarea name="txtccontent" id="" cols="20" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <center><input type="submit" value="Submit"></center> 
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+        <br><br>
+        <h3>Your Previous Complaints</h3>
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                  <th class="text-center">SL No:</th>
+                  <th class="text-center">Complaint Title:</th>
+                  <th class="text-center">Complaint Content:</th>
+                  <th class="text-center">Admin Reply:</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for i in data  %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.comp_data.complaint_title}}</td>
+                <td>{{i.comp_data.complaint_content}}</td>
+                <td>
+                    {% if i.comp_data.complaint_reply %}
+                    {{i.comp_data.complaint_reply}}
+                    {% else %}
+                    Waiting for reply...
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </tbody>
+    </center>
+    
+</body>
+</html>
+
+{% endblock content %}
+

@@ -1,0 +1,62 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Complaints</title>
+</head>
+<body>
+    <center>
+    <form action="" method="post">
+        {% csrf_token %}
+    
+        <h3>Report Your Complaints Here...</h3>
+        <table border="1" rules="none">
+            <tr>
+                <td>Complaint Title:</td>
+                <td><input type="text" name="txtctitle" id=""></td>
+            </tr>
+            <tr>
+                <td>Complaint Content:</td>
+                <td><textarea name="txtccontent" id="" cols="20" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <center><input type="submit" value="Submit"></center> 
+                </td>
+            </tr>
+        </table>
+    </form>
+        <br><br>
+        <h3>Your Previous Complaints</h3>
+        <br>
+        <table border="1">
+            <tr>
+                <td>SL No:</td>
+                <td>Complaint Title:</td>
+                <td>Complaint Content:</td>
+                <td>Admin Reply:</td>
+            </tr>
+            {% for i in data  %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.comp_data.complaint_title}}</td>
+                <td>{{i.comp_data.complaint_content}}</td>
+                <td>
+                    {% if i.comp_data.complaint_reply %}
+                    {{i.comp_data.complaint_reply}}
+                    {% else %}
+                    Waiting for reply...
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+    
+</body>
+</html>
+{% endblock content %}

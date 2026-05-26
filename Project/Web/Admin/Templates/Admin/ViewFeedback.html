@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedbacks</title>
+</head>
+<body>
+    <center>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>Feedbacks From Farmer</h3>
+            <table border="1">
+                <tr>
+                    <td>Sl No:</td>
+                    <td>Farmer Name:</td>
+                    <td>Farmer Contact:</td>
+                    <td>Farmer Email:</td>
+                    <td>Feedback Content:</td>
+                    <td>Feedback Time</td>
+                    
+                </tr>
+                {% for i in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.farmer.farmer_name}}</td>
+                    <td>{{i.farmer.farmer_contact}}</td>
+                    <td>{{i.farmer.farmer_email}}</td>
+                    <td>{{i.cfeed_data.feedback_content}}</td>
+                    <td>{{i.cfeed_data.feedback_time}}</td>
+                    
+
+                </tr>
+                {% endfor %}
+            </table>
+            <h3>Feedbacks From Users</h3>
+            <table border="1">
+                <tr>
+                    <td>Sl No:</td>
+                    <td>User Name:</td>
+                    <td>User Contact:</td>
+                    <td>User Email:</td>
+                    <td>Feedback Content:</td>
+                    <td>Feedback Time:</td>
+                    
+                </tr>
+                {% for i in data2 %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.user.user_name}}</td>
+                    <td>{{i.user.user_contact}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.ufeed_data.feedback_content}}</td>
+                    <td>{{i.ufeed_data.feedback_time}}</td>
+                    
+                </tr>
+                {% endfor %}   
+
+            </table>
+        </form>
+    </center>
+    
+</body>
+</html>

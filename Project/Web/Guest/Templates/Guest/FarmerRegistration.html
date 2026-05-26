@@ -1,0 +1,177 @@
+
+ <!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farmer Registration</title>
+</head>
+<body>
+    <form action="" method="post"  enctype="multipart/form-data">
+        {% csrf_token%}
+        <center>
+            <table border="2" align="center">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="txtname" id="txtname"></td>
+                </tr>
+                <tr>
+                    <td>Contacts</td>
+                    <td><input type="text" name="txtcontact" id="txtcontact"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="txtemail" id="txtemail"></td>
+                </tr>
+                
+                <tr>
+                    <td>Address</td>
+                    <td><textarea name="txtarea" cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td><select name="sel_district" id="sel_district">
+                            <option value="">----select----</option>
+                            {% for i in district %}
+                            <option value="{{i.id}}">{{i.dis.district_name}}</option>
+                            {% endfor %}
+                        </select>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td><select name="sel_place" id="sel_place">
+                            <option value="">----select----</option>
+                        </select>
+                </tr>
+    
+                <tr>
+                    <td>Photo</td>
+                    <td><input type="file" name="file_photo" id="file_photo"></td>
+                </tr>
+                <tr>
+                    <td>Proof</td>
+                    <td><input type="file" name="file_proof" id="file_proof"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="txtpass" id="txtpass"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Register" name="btnsub">
+                        <input type="reset" value="cancel" name="btnsub1">
+                    </td>
+                </tr>
+            </table>
+    
+    
+    
+    </body>
+    
+    </html>
+    
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = "{% url 'webGuest:ajaxplace' %}"
+            $.ajax({
+                url: ur,
+                data: { did: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+    </script> -->
+
+    {% load static %}
+   <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>User Register</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static 'Fregister/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'Fregister/css/style.css' %}">
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{% static 'Fregister/images/261.jpg' %}" alt="" style="width: 300px;">
+				</div>
+                <form action="" method="post"  enctype="multipart/form-data">
+                    {% csrf_token%}					
+                    <h3>Farmer Registration</h3>
+					<div class="form-row">
+						<input type="text" class="form-control" placeholder="Name" name="txtname">
+						<input type="email" class="form-control" placeholder="Mail" name="txtemail">
+					</div>
+					<div class="form-row">
+						<input type="text" class="form-control" placeholder="Contacts" name="txtcontact">
+                        <input type="text" class="form-control" placeholder="House Name" name="txtarea">
+
+						
+					</div>
+                    <div class="form-row">
+                        <div class="form-holder">
+							<select name="sel_district" id="sel_district" class="form-control">
+                                <option value="">District</option>
+                                {% for i in district %}
+                                <option value="{{i.id}}">{{i.dis.district_name}}</option>
+                                {% endfor %}
+                            </select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div>
+                        <div class="form-holder">
+							<select name="sel_place" id="sel_place" class="form-control">
+                                <option value="">Place</option>
+                            </select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div> 
+                    </div>
+                    <div class="form-row">
+						<input type="file" class="form-control" placeholder="Photo" name="file_photo">
+                        <input type="file" class="form-control" placeholder="Proof" name="file_proof">	
+					</div>
+                    <div class="form-row">
+						<input type="password" class="form-control" placeholder="Password" name="txtpass">
+                        	</div>
+
+
+					
+					<button type="submit" name="txtsub">Register
+						<i class="zmdi zmdi-long-arrow-right"></i>
+					</button>
+				</form>
+				
+			</div>
+		</div>
+
+		<script src="{% static 'Fregister/js/jquery-3.3.1.min.js' %}"></script>
+		<script src="{% static 'Fregister/js/main.js' %}"></script>
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = "{% url 'webGuest:ajaxplace' %}"
+            $.ajax({
+                url: ur,
+                data: { did: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+    </script>

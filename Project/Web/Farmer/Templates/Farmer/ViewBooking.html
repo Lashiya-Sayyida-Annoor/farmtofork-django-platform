@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Booking</title>
+</head>
+<body>
+    <h2>View Booking</h2>
+    <table border="1">
+        <tr>
+            <th>User Image</th>
+            <th>User Name</th>
+            <th>User Address</th>    
+            <th>Action</th>
+            
+        </tr>
+        {% for i in complist %}
+        <tr>
+            <td><img src="{{i.user_data.image}}"  width="100px" height="100px"></td>
+            <td>{{ i.user_data.name }}</td>
+            <td>{{ i.comp_data.vegetable_price }}</td>
+            <td>{{ i.comp_data.vegetable_quaty }}</td>
+            <td>{{ item.total_price }}</td>
+            <td><a href="" class="btn btn-primary"> Rating </a><br><br></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

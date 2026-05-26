@@ -1,0 +1,100 @@
+{% extends 'Farmer/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vegetables</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" >
+        {% csrf_token%}
+        <center>
+            <h2 style="color:#1771cb">VEGETABLES</h2>
+            <!-- Bootstrap styled table -->
+            <table class="table table-bordered table-striped" style="color:#1771cb">
+                <tr>
+                    <td>vegetable name</td>
+                    <td><input type="text" name="txtname" id="txtname"></td>
+                </tr>
+                <tr>
+                    <td>price</td>
+                    <td><input type="text" name="txtprice" id="txtprice"></td>
+                </tr> 
+                <tr>
+                    <td>stock</td>
+                    <td><input type="text" name="txtstock" id="txtstock"></td>
+                </tr> 
+                <tr>
+                    <td>category</td>
+                    <td>
+                        <select name="selcategory" id="selcategory" class="form-control">
+                            <option>--select--</option>
+                            {% for i in category %}
+                                <option 
+                                {% if i.id == cat.category_id %}
+                                selected
+                                {% endif %}
+                                value="{{i.id}}">{{i.cat.category_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>image</td>
+                    <td><input type="file" name="file_img" id="file_img" ></td>
+                </tr>
+               <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Save" name="btnsub" class="btn btn-primary"></td>
+                </tr> 
+            </table><br><br>
+
+            <!-- Bootstrap styled table -->
+            <table class="table table-bordered table-striped" style="color:#1771cb">
+                <tr>
+                    <td>SI.NO</td>
+                    <td>vegetable name</td>
+                    <td>price</td>
+                    <td>stock</td>
+                    <td>category</td>
+                    <td>image</td>
+                </tr>
+                {% for i in data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.vegetable.vegetable_name}}</td>
+                        <td>{{i.vegetable.vegetable_price}}</td>
+                        <td>{{i.vegetable.vegetable_stock}}</td>
+                        <td>{{i.cat_name.category_name}}</td>
+                        <td><img src="{{i.vegetable.vegetable_photo }}" alt="Farmer Photo" width="100px" height="100px"></td> 
+                        <td><a href="{% url 'webFarmer:vegstock' i.id %}" class="btn btn-primary"> Stock </a><br><br>
+                            <a href="" class="btn btn-primary"> Delete </a><br><br>
+                            <a href="" class="btn btn-primary"> Damage Stock</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if msg %}
+                <script>
+                    alert("{{msg}}")
+                    window.location = "{% url 'webFarmer:vegetable' %}"
+                </script>
+            {% endif %}
+        </center>
+    </form>
+    <!-- Bootstrap JS and jQuery links -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock content %}

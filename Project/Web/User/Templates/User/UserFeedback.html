@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feedback</title>
+</head>
+<body>
+    <center>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>Send Your Feedbacks</h3>
+            <table border="1" rules="none">
+                <tr>
+                    <td>Feedback Content</td>
+                    <td><textarea name="txtfcontent" id="" cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center><input type="submit" value="Send Feedback"></center>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </center>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaints</title>
+</head>
+<body>
+    <center>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3  style="color:#1771cb">Complaints From farmer</h3>
+            <table border="1" cellpadding="10" cellspacing="0" class="table  table-bordered table table-hover" style="color:#d6e5f5">
+                <tr>
+                    <td>Sl No</td>
+                    <td>farmer Name</td>
+                    <td>farmer Contact</td>
+                    <td>farmer Email</td>
+                    <td>Complaint Title</td>
+                    <td>Complaint Description</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in data %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.farmer.farmer_name}}</td>
+                    <td>{{i.farmer.farmer_contact}}</td>
+                    <td>{{i.farmer.farmer_email}}</td>
+                    <td>{{i.ccomp_data.complaint_title}}</td>
+                    <td>{{i.ccomp_data.complaint_content}}</td>
+                    <td>
+                        {% if i.ccomp_data.complaint_reply %}
+                        
+                        {{i.ccomp_data.complaint_reply}}
+                        {% else %}
+                        <a href="{% url 'webadmin:replycomplaints' i.id %}">Reply</a>
+                    {% endif %}
+                </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+           <br><br> <h3  style="color:#1771cb">Complaints From Users</h3>
+           <table border="1" cellpadding="10" cellspacing="0" class="table  table-bordered table table-hover" style="color:#d6e5f5" >
+            <tr>
+                    <td>Sl No</td>
+                    <td>User Name</td>
+                    <td>User Contact</td>
+                    <td>User Email</td>
+                    <td>Complaint Title</td>
+                    <td>Complaint Description</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in data2 %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.user.name}}</td>
+                    <td>{{i.user.contact}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.ccomp_data.complaint_title}}</td>
+                    <td>{{i.ccomp_data.complaint_content}}</td>
+                    <td>
+                        {% if i.ccomp_data.complaint_reply %}
+                        
+                        {{i.ccomp_data.complaint_reply}}
+                        {% else %}
+                        <a href="{% url 'webadmin:replycomplaints' i.id %}">Reply</a>
+                    {% endif %}
+                </td>
+                </tr>
+                {% endfor %}   
+
+            </table>
+        </form>
+    </center>
+    
+</body>
+</html>
+{% endblock content %}

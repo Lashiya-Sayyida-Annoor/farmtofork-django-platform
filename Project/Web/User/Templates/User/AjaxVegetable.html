@@ -1,0 +1,12 @@
+<div class="main" id="result">
+    {% for i in vegetable %}
+    <div class="sub">
+        <div><img src="{{i.vegetable.vegetable_photo}}" width="150" height="150" alt=""></div>
+        <div>Name :{{ i.vegetable.vegetable_name }}</div>
+        <div>Price :{{ i.vegetable.vegetable_price }}</div>
+        <div>Stock :{{ i.vegetable.vegetable_stock }}</div>
+        <div>Category :{{ i.cat_name.category_name }}</div>
+        <div><a href="">Add To Cart</a></div>
+    </div>
+    {% endfor %}
+</div>

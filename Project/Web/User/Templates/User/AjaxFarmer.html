@@ -1,0 +1,11 @@
+<div class="main" id="result">
+    {% for i in farmer %}
+    <div class="sub">
+        <div><img src="{{i.farmer.farmer_photo}}" width="150" height="150" alt=""></div>
+        <div>Name :{{ i.farmer.farmer_name }}</div>
+        <div>Contact :{{ i.farmer.farmer_contact }}</div>
+        <div>Email :{{ i.farmer.farmer_email }}</div>
+        <div><a href="{% url 'webuser:searchveg' i.id %}">View more</a></div>
+    </div>
+    {% endfor %}
+</div>

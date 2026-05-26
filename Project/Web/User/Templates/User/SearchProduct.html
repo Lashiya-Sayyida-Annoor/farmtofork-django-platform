@@ -1,0 +1,177 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Vegetable</title>
+    <style>
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .sub {
+            padding: 15px;
+            background-color: #C8E6C9;
+            width: fit-content;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .loader {
+  color: green;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: mulShdSpin 1.3s infinite linear;
+  transform: translateZ(0);
+}
+
+@keyframes mulShdSpin {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em, 
+    2em -2em 0 0em, 3em 0 0 -1em, 
+    2em 2em 0 -1em, 0 3em 0 -1em, 
+    -2em 2em 0 -1em, -3em 0 0 -1em, 
+    -2em -2em 0 0;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 
+    3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, 
+    -2em 2em 0 -1em, -3em 0 0 -1em, 
+    -2em -2em 0 -1em;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em, 
+    2em -2em 0 0, 3em 0 0 0.2em, 
+    2em 2em 0 0, 0 3em 0 -1em, 
+    -2em 2em 0 -1em, -3em 0 0 -1em, 
+    -2em -2em 0 -1em;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+     3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, 
+     -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+     3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, 
+     -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+     3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, 
+     -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 
+    3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
+    -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 
+    3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
+    -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+  }
+}
+  .load_div {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: #a5d6a72b;
+    left: 0;
+    top: 0;
+    backdrop-filter: blur(7px);
+    justify-content: center;
+    align-items: center;
+  }
+    </style>
+</head>
+<body>
+    <div class="load_div" id="load">
+        <span class="loader"></span>
+    </div>
+    <h1 style="color:#124416" align="center">Vegetable Market</h1>
+    <form id="searchForm" method="get" action="">
+        {% csrf_token %}
+        <div class="search">
+            <div>
+                <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">Select Category</option>
+                {% for i in category %}
+                <option value="{{i.id}}">{{i.category.category_name}}</option>
+                {% endfor %}
+            </select>
+            </div>
+           <div>
+            <label for="searchByName">Search by Name:</label>
+            <input type="text" id="searchByName" name="searchByName" onkeyup="keySearch(this.value)">
+           </div>
+        
+        </div>
+    </form>
+
+    <div class="main" id="result">
+        {% for i in vegetable %}
+        <div class="sub">
+            <div><img src="{{i.vegetable.vegetable_photo}}" width="150" height="150" alt=""></div>
+            <div>Name :{{ i.vegetable.vegetable_name }}</div>
+            <div>Price :{{ i.vegetable.vegetable_price }}</div>
+            <div>Stock :{{ i.vegetable.vegetable_stock }}</div>
+            <div>Category :{{ i.cat_name.category_name }}</div>
+            <div ><a href="{% url 'webuser:vegetablecart' i.id %}" style="color:#830512">Add To Cart</a></div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+{% if msg %}
+<script>
+  alert("{{msg}}")
+  window.location = "{% url 'webuser:searchpro' %}"
+</script>
+{% endif %}
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#category").change(function () {
+        var cid = $(this).val();
+        var ur = "{% url 'webuser:ajaxvegetable' %}"
+        document.getElementById("load").style.display = "flex"
+        $.ajax({
+            url: ur,
+            data: { cid: cid, },
+            success: function (data) {
+                $("#result").html(data);
+                document.getElementById("load").style.display = "none"
+            },
+        });
+    });
+
+    function keySearch(key) {
+        // console.log(key);
+        var ur = "{% url 'webuser:ajaxvegetablekeysearch' %}"
+        document.getElementById("load").style.display = "flex"
+        $.ajax({
+            url: ur,
+            data: { key: key, },
+            success: function (data) {
+                $("#result").html(data);
+                document.getElementById("load").style.display = "none"
+            },
+        });
+    }
+</script>
+{% endblock content %}

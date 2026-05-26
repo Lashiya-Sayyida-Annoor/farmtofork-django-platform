@@ -1,0 +1,90 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login Page</title>
+
+    <link rel="shortcut icon" href="{% static 'Login/images/fav.jpg' %}">
+    <link rel="stylesheet" href="{% static 'Login/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Login/css/fontawsom-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Login/css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <style>
+        .container-fluid.full-bg {
+            background-image: url('{% static "Login/images/34695.jpg" %}');
+            /* Adjust background properties as needed */
+            background-size: cover;
+            background-position: center;
+            /* Add other background properties here */
+        }
+
+        .login-box {
+            background-color: #21252985;
+            border-top: 5px solid #212529;
+            text-align: center; /* Center the content */
+            padding: 20px;
+        }
+
+        .login-box i {
+            font-size: 30px; /* Adjust the icon size */
+            margin-bottom: 20px; /* Add some space below the icon */
+        }
+        .alert {
+    padding: 10px; /* Adjust padding */
+    margin-bottom: 10px; /* Adjust margin */
+}
+
+    </style>
+</head>
+
+<body class="h-100">
+    <div class="container-fluid full-bg h-100">
+        <div class="container h-100">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row no-margin">
+                    <div class="col-md-8 offset-md-8">
+                        <div class="bg-layer">
+                            <div class="login-box">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <h3>SIGNIN</h3>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control form-control-sm" placeholder="Email" name="txtemail">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control form-control-sm" name="txtpass" id="txtpass" placeholder="Password">
+                                </div>
+                                <button type="submit" class="btn btn-default" name="btnsub">Login</button>
+                                <p class="no-c">Not a member yet? <a href="">Create your Account</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% if msg %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{msg}}
+                </div>
+                {% endif %}
+        </div>
+    </div>
+</body>
+
+<script src="{% static 'Login/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'Login/js/popper.min.js' %}"></script>
+<script src="{% static 'Login/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'Login/js/script.js' %}"></script>
+
+</html>

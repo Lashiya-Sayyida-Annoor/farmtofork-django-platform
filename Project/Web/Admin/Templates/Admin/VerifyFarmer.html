@@ -1,0 +1,60 @@
+{% extends 'Admin/Header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <style>
+      .table {
+    
+    color: #1771cb;
+}
+        </style> -->
+
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <form id="form1" name="form1" method="post" action="">
+            <table class="table" style="color:#1771cb">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>E-Mail</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for farmer in pdata %}
+                        <tr>
+                            <td>{{ farmer.place.farmer_name }}</td>
+                            <td>{{ farmer.place.farmer_email }}</td>
+                            <td>{{ farmer.place.farmer_address }}</td>
+                            <td>{{ farmer.place.farmer_contact }}</td>
+                            
+                            <td>
+                               <a href="{% url 'webadmin:accept_farmer' farmer.id %}" class="btn btn-success">Accept</a>
+                                <a href="{% url 'webadmin:reject_farmer' farmer.id %}"  class="btn btn-danger ">Reject</a>
+                               
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <!-- Bootstrap JavaScript files (optional, but may be needed for certain Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

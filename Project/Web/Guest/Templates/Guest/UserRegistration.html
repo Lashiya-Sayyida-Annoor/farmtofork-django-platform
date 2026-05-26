@@ -1,0 +1,283 @@
+<!--{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+           
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            padding-top: 40px; /* Adjust as needed */
+        }
+
+        .registration-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+            backdrop-filter: blur(4px); /* Blur effect */
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Registration Form</h5>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="txtname">Name</label>
+                                <input type="text" class="form-control" id="txtname" name="txtname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtcontact">Contacts</label>
+                                <input type="text" class="form-control" id="txtcontact" name="txtcontact" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtemail">Email</label>
+                                <input type="email" class="form-control" id="txtemail" name="txtemail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtdob">Date of Birth</label>
+                                <input type="date" class="form-control" id="txtdob" name="txtdob" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="btngender" id="male"
+                                            value="male" required>
+                                        <label class="form-check-label" for="male">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="btngender" id="female"
+                                            value="female" required>
+                                        <label class="form-check-label" for="female">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="btngender" id="others"
+                                            value="others" required>
+                                        <label class="form-check-label" for="others">Others</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtarea">Address</label>
+                                <textarea class="form-control" id="txtarea" name="txtarea" rows="3"
+                                    required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel_district">District</label>
+                                <select class="form-control" id="sel_district" name="sel_district" required>
+                                    <option value="">----select----</option>
+                                    {% for i in district %}
+                                    <option value="{{i.id}}">{{i.dis.district_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel_place">Place</label>
+                                <select class="form-control" id="sel_place" name="sel_place" required>
+                                    <option value="">----select----</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="file_photo">Photo</label>
+                                <input type="file" class="form-control-file" id="file_photo" name="file_photo"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="file_proof">Proof</label>
+                                <input type="file" class="form-control-file" id="file_proof" name="file_proof"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtpass">Password</label>
+                                <input type="password" class="form-control" id="txtpass" name="txtpass" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" name="btnsub">Register</button>
+                                <button type="reset" class="btn btn-secondary" name="btnsub1">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = "{% url 'webGuest:ajaxplace' %}"
+            $.ajax({
+                url: ur,
+                data: {
+                    did: did,
+                },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+    </script>
+</body>
+
+</html> -->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>User Registration</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'Registration/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'Registration/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'Registration/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'Registration/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'Registration/css/main.css' %}" rel="stylesheet" media="all">
+
+</head>
+
+<body>
+    
+    <div class="page-wrapper bg-red p-t-80 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960" >
+            <div class="card card-2"  >
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2  align="center"class="title">CUSTOMER REGISTRATION</h2>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="input--style-2" type="text" placeholder="Name" name="txtname">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="text" placeholder="Contacts" name="txtcontact">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="email" placeholder="Email" name="txtemail">
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input class="input--style-2 js-datepicker" type="Date" placeholder="DOB" name="txtdob">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="btngender">
+                                            <option disabled="disabled" selected="selected">Gender</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="sel_district" id="sel_district">
+                                    <option disabled="disabled" selected="selected">Districts</option>
+                                    {% for i in district %}
+                                        <option value="{{ i.id }}">{{ i.dis.district_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="sel_place" id="sel_place">
+                                    <option disabled="disabled" selected="selected">Places</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="text" placeholder="House name" name="txtarea">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="file"  name="file_photo">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="file"  name="file_proof">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-2" type="password" placeholder="Password" name="txtpass">
+                        </div>
+
+                        <div class="p-t-30 d-flex justify-content-center">
+                            <button class="btn btn--radius btn--green mr-2" type="submit" name="btnsub">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'Registration/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'Registration/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'Registration/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'Registration/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'Registration/js/global.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $("select[name='sel_district']").change(function () {
+                var did = $(this).val();
+                var ur = "{% url 'webGuest:ajaxplace' %}"
+                $.ajax({
+                    url: ur,
+                    data: { did: did },
+                    success: function (data) {
+                        $("#sel_place").html(data);
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
