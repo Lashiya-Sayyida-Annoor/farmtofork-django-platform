@@ -5,3 +5,4 @@ env/
 venv/
 MainProjectenv/
 node_modules/
+Project/Web/DB/*.json
